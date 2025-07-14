@@ -16,36 +16,19 @@ class BalanceRoutes {
   }
 
   private setupRoutes(): void {
-    // In your balanceRoutes.ts
     /**
      * @swagger
-     * tags:
-     *   name: Balance
-     *   description: Financial balance tracking
-     */
-
-    /**
-     * @swagger
-     * /balance:
+     * /api/balance:
      *   get:
+     *     summary: Get current balance
      *     tags: [Balance]
-     *     summary: Get current financial balance
      *     security:
      *       - bearerAuth: []
      *     responses:
      *       200:
-     *         description: Current balance information
-     *         content:
-     *           application/json:
-     *             schema:
-     *               $ref: '#/components/schemas/Balance'
-     *       401:
-     *         description: Unauthorized
-     *         content:
-     *           application/json:
-     *             schema:
-     *               $ref: '#/components/schemas/ErrorResponse'
+     *         description: Balance fetched successfully
      */
+
     this.router.get("/", this.balanceController.getBalance);
   }
 

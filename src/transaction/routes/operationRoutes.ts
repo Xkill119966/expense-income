@@ -30,6 +30,47 @@ class OperationRoutes {
   }
 
   private setupRoutes(): void {
+    /**
+     * @swagger
+     * /api/operations:
+     *   post:
+     *     summary: Create a new operation
+     *     tags: [Operation]
+     *     security:
+     *       - bearerAuth: []
+     *     requestBody:
+     *       required: true
+     *       content:
+     *         application/json:
+     *           schema:
+     *             type: object
+     *             required:
+     *               - amount
+     *               - dateOperation
+     *               - categoryId
+     *               - typeId
+     *             properties:
+     *               amount:
+     *                 type: number
+     *                 example: 100
+     *               dateOperation:
+     *                 type: string
+     *                 format: date-time
+     *                 example: 2025-07-11T00:00:00.000Z
+     *               note:
+     *                 type: string
+     *                 example: Optional note about the transaction
+     *               categoryId:
+     *                 type: integer
+     *                 example: 1
+     *               typeId:
+     *                 type: integer
+     *                 example: 2
+     *     responses:
+     *       201:
+     *         description: Operation created successfully
+     */
+
     this.router.post(
       "/",
       validateRequest(createOperationSchema),
@@ -37,6 +78,19 @@ class OperationRoutes {
     );
 
     // Get all operations (with optional query filters)
+    /**
+     * @swagger
+     * /api/operations:
+     *   get:
+     *     summary: Get all operations
+     *     tags: [Operation]
+     *     security:
+     *       - bearerAuth: []
+     *     responses:
+     *       200:
+     *         description: List of operations
+     */
+
     this.router.get(
       "/",
       validateRequest(getOperationsSchema),
@@ -44,6 +98,25 @@ class OperationRoutes {
     );
 
     // Get operations by type
+    /**
+     * @swagger
+     * /api/operations/type/{typeId}:
+     *   get:
+     *     summary: Get operations by type ID
+     *     tags: [Operation]
+     *     security:
+     *       - bearerAuth: []
+     *     parameters:
+     *       - in: path
+     *         name: typeId
+     *         required: true
+     *         schema:
+     *           type: integer
+     *     responses:
+     *       200:
+     *         description: Filtered operations by type
+     */
+
     this.router.get(
       "/type/:typeId",
       validateRequest(getOperationsByTypeSchema),
@@ -51,6 +124,25 @@ class OperationRoutes {
     );
 
     // Get single operation
+    /**
+     * @swagger
+     * /api/operations/{id}:
+     *   get:
+     *     summary: Get a single operation by ID
+     *     tags: [Operation]
+     *     security:
+     *       - bearerAuth: []
+     *     parameters:
+     *       - in: path
+     *         name: id
+     *         required: true
+     *         schema:
+     *           type: integer
+     *     responses:
+     *       200:
+     *         description: Operation details
+     */
+
     this.router.get(
       "/:id",
       validateRequest(getOperationByIdSchema),
@@ -58,6 +150,48 @@ class OperationRoutes {
     );
 
     // Update operation (using PATCH as per your requirement)
+    /**
+     * @swagger
+     * /api/operations/{id}:
+     *   patch:
+     *     summary: Update an existing operation
+     *     tags: [Operation]
+     *     security:
+     *       - bearerAuth: []
+     *     parameters:
+     *       - in: path
+     *         name: id
+     *         required: true
+     *         schema:
+     *           type: integer
+     *     requestBody:
+     *       required: true
+     *       content:
+     *         application/json:
+     *           schema:
+     *             type: object
+     *             properties:
+     *               amount:
+     *                 type: number
+     *                 example: 100.5
+     *               dateOperation:
+     *                 type: string
+     *                 format: date-time
+     *                 example: 2025-07-11T00:00:00.000Z
+     *               note:
+     *                 type: string
+     *                 example: Optional note about the transaction
+     *               categoryId:
+     *                 type: integer
+     *                 example: 7
+     *               typeId:
+     *                 type: integer
+     *                 example: 2
+     *     responses:
+     *       200:
+     *         description: Operation updated successfully
+     */
+
     this.router.patch(
       "/:id",
       validateRequest(updateOperationSchema),
@@ -65,6 +199,28 @@ class OperationRoutes {
     );
 
     // Delete operation
+    /**
+     * @swagger
+     * /api/operations/{id}:
+     *   delete:
+     *     summary: Delete an operation by ID
+     *     tags: [Operation]
+     *     security:
+     *       - bearerAuth: []
+     *     parameters:
+     *       - in: path
+     *         name: id
+     *         required: true
+     *         schema:
+     *           type: integer
+     *         description: Operation ID to delete
+     *     responses:
+     *       200:
+     *         description: Operation deleted successfully
+     *       404:
+     *         description: Operation not found
+     */
+
     this.router.delete(
       "/:id",
       validateRequest(deleteOperationSchema),

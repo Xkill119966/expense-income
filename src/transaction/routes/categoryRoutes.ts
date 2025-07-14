@@ -17,6 +17,19 @@ class CategoryRoutes {
 
   private setupRoutes(): void {
     // GET all categories
+    /**
+     * @swagger
+     * /api/categories:
+     *   get:
+     *     summary: Get all categories
+     *     tags: [Category]
+     *     security:
+     *       - bearerAuth: []
+     *     responses:
+     *       200:
+     *         description: List of categories
+     */
+
     this.router.get("/", this.categoryController.getAll);
   }
 
