@@ -1,0 +1,22 @@
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres_sports_booking_system
+    environment:
+      POSTGRES_USER: booking_user
+      POSTGRES_PASSWORD: booking_password
+      POSTGRES_DB: booking_user_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+  server:
+    build:
+      context: .
+    container_name: server
+    ports:
+      - "8088:8088"
+    depends_on:
+      - postgres
+    env_file:
+      - .env.prod    
+volumes:
+  postgres_data:
