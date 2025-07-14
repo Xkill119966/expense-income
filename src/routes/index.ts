@@ -16,7 +16,11 @@ class Routes {
     app.use("/api/operations", authenticate, OperationRoutes);
     app.use("/api/categories", authenticate, CategoryRoutes);
 
-    app.get("/health", (_req: Request, res: Response) => {});
+    app.get("/health", (_req: Request, res: Response) => {
+      res.json({
+        test: "Ok",
+      });
+    });
 
     app.use("/api-docs", serve, setup(swaggerSpec));
   }

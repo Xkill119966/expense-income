@@ -1,20 +1,13 @@
 {
 	"compilerOptions": {
-		"target": "ESNext",
-		"module": "CommonJS",
-		"baseUrl": ".",
-		"paths": {
-			"@/*": ["src/*"]
-		},
-		"moduleResolution": "Node",
-		"outDir": "dist",
-		"importsNotUsedAsValues": "remove",
-		"strict": true,
-		"esModuleInterop": true,
-		"skipLibCheck": true,
-		"types": ["./src/types/express", "multer", "jest"],
-
+	  "target": "ESNext",
+	  "module": "CommonJS", // or "ESNext" if using ESM
+	  "outDir": "./dist",
+	  "rootDir": "./src",
+	  "strict": true,
+	  "esModuleInterop": true,
+	  "types": ["./src/types/express", "multer", "jest"],
 	},
-	"include": ["src/**/*", "libs"],
+	"include": ["src/**/*"],
 	"exclude": ["node_modules"]
-}
+  }
